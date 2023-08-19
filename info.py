@@ -1,4 +1,4 @@
-def summarize_dataset(data, num_head=5, num_tail=5):
+def summarize_dataset(data, num_head=5, num_tail=5, drop_columns=None, drop_duplicates=False):
     """
     Veri çerçevesini özetleyen bir fonksiyon.
 
@@ -6,9 +6,11 @@ def summarize_dataset(data, num_head=5, num_tail=5):
     data (DataFrame): Özetlemek istediğiniz veri çerçevesi.
     num_head (int): İlk kaç satırın gösterileceğini belirler.
     num_tail (int): Son kaç satırın gösterileceğini belirler.
+    drop_columns (list): Silmek istediğiniz sütunların listesi.
+    drop_duplicates (bool): Yinelemeleri (duplikasyonları) veri çerçevesinden kaldırmak için kullanılır.
 
     Returns:
-    None
+    DataFrame: İşlenmiş veri çerçevesi.
     """
     print(f"First {num_head} rows:")
     print(data.head(num_head))
@@ -42,6 +44,11 @@ def summarize_dataset(data, num_head=5, num_tail=5):
     num_duplicates = data.duplicated().sum()
     print(f"Number of duplicated rows: {num_duplicates}")
     print("\n")
+
+    if drop_duplicates:
+        if drop_columns:
+            data.drop_duplicates(subset=drop_columns, inplace=True)
+        else:
+            data.drop_duplicates(inplace=True)
     
-    
-    
+
