@@ -1,5 +1,15 @@
 def summarize_dataset(data, num_head=5, num_tail=5):
+    """
+    Veri çerçevesini özetleyen bir fonksiyon.
 
+    Parameters:
+    data (DataFrame): Özetlemek istediğiniz veri çerçevesi.
+    num_head (int): İlk kaç satırın gösterileceğini belirler.
+    num_tail (int): Son kaç satırın gösterileceğini belirler.
+
+    Returns:
+    None
+    """
     print(f"First {num_head} rows:")
     print(data.head(num_head))
     print("\n")
@@ -16,7 +26,9 @@ def summarize_dataset(data, num_head=5, num_tail=5):
     data.info()
     print("\n")
     
-    print(f"Missing Values:\n{data.isnull().sum()}")
+    missing_values = data.isnull().sum()
+    missing_columns = missing_values[missing_values > 0]
+    print(f"Missing Values:\n{missing_columns}")
     print("\n")
     
     print("Statistical Summary:")
