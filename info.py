@@ -1,15 +1,5 @@
 def summarize_dataset(data, num_head=5, num_tail=5):
-    """
-    Veri çerçevesini özetleyen bir fonksiyon.
 
-    Parameters:
-    data (DataFrame): Özetlemek istediğiniz veri çerçevesi.
-    num_head (int): İlk kaç satırın gösterileceğini belirler.
-    num_tail (int): Son kaç satırın gösterileceğini belirler.
-
-    Returns:
-    None
-    """
     print(f"First {num_head} rows:")
     print(data.head(num_head))
     print("\n")
