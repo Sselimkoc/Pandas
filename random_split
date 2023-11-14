@@ -1,0 +1,48 @@
+def random_split_data(X, y, train_percentage=0.7, val_percentage=0.15, test_percentage=0.15):
+    """
+    Randomly splits the data into training, validation, and test sets.
+
+    Parameters:
+    - X: Feature matrix
+    - y: Labels
+    - train_percentage: Percentage of data for training (default is 0.7)
+    - val_percentage: Percentage of data for validation (default is 0.15)
+    - test_percentage: Percentage of data for testing (default is 0.15)
+
+    Returns:
+    - X_train, y_train: Training set
+    - X_val, y_val: Validation set
+    - X_test, y_test: Test set
+    """
+
+    # Check if percentages sum up to 1
+    total_percentage = train_percentage + val_percentage + test_percentage
+    if total_percentage != 1.0:
+        raise ValueError("Percentages should sum up to 1.0")
+
+    # Get the total number of examples
+    total_examples = len(X)
+
+    # Shuffle the data
+    indices = np.arange(total_examples)
+    np.random.shuffle(indices)
+
+    # Split data into training, validation, and test sets
+    train_size = int(train_percentage * total_examples)
+    val_size = int(val_percentage * total_examples)
+
+    train_indices = indices[:train_size]
+    remaining_indices = indices[train_size:]
+
+    val_indices = remaining_indices[:val_size]
+    test_indices = remaining_indices[val_size:]
+
+    # Create sets
+    X_train, y_train = X[train_indices], y[train_indices]
+    X_val, y_val = X[val_indices], y[val_indices]
+    X_test, y_test = X[test_indices], y[test_indices]
+
+    return X_train, y_train, X_val, y_val, X_test, y_test
+
+# Example usage:
+X_train, y_train, X_val, y_val, X_test, y_test = random_split_data(X, y)
